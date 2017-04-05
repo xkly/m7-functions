@@ -32,11 +32,17 @@ DescribeDifference(vector3, vector4)
 ### Bonus ###
 
 # Rewrite your `DescribeDifference` function to tell you the name of the vector which is longer
-AltDescribeDifference <- function(v1, v2) {
-  vector.name <- substitute(v1)
-  if (length(v1) < length(v2)) {
-    vector.name <- substitute(v2)
+SecondDescribeDifference <- function(v1, v2) {
+  v1.name <- deparse(substitute(v1))
+  v2.name <- deparse(substitute(v2))
+  if (length(v1) > length(v2)) {
+    return (paste(v1.name, "is the longer vector"))
+  } else if (length(v1) < length(v2)) {
+    return (paste(v2.name, "is the longer vector"))
+  } else {
+    return (paste(v1.name, "and", v2.name, "are the same length"))
   }
-  return (paste(vector.name, "is the longer vector"))
 }
-AltDescribeDifference(vector2, vector4)
+
+SecondDescribeDifference(vector1, vector2)
+SecondDescribeDifference(vector2, vector4)
