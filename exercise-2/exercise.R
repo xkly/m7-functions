@@ -8,25 +8,27 @@ CompareLength <- function(a, b) {
 }
 
 # Pass two vectors of different length to your `CompareLength` function
-vector1 <- c(1, 5, 7, 3, 6, 4)
-vector2 <- c(4, 3, 8, 9)
+vector1 <- (1:6)
+vector2 <- (1:4)
 CompareLength(vector1, vector2)
 
 # Write a function `DescribeDifference` that will return one of the following statements:
 # "Your first vector is longer by N elements"
 # "Your second vector is longer by N elements"
 DescribeDifference <- function(v1, v2) {
-  selected <- "first"
-  if (length(v1) < length(v2)) {
-    selected <- "second"
-  }
-  length <- abs(length(v1) - length(v2))
-  return (paste("Your", selected, "vector is longer by", length, "elements"))
+  difference <- length(v1) - length(v2)
+  if (difference > 0) {
+    return (paste("Your first vector is longer by", abs(difference), "elements"))
+  } else if (difference < 0) {
+    return (paste("Your second vector is longer by", abs(difference), "elements"))
+  } else (
+    return ("Your vectors are of the same length")
+  )
 }
 
 # Pass two vectors to your `DescribeDifference` function
-vector3 <- c(3, 6)
-vector4 <- c(0, 7, 9, 6, 8)
+vector3 <- (1:2)
+vector4 <- (1:5)
 DescribeDifference(vector3, vector4)
 
 ### Bonus ###
@@ -35,13 +37,19 @@ DescribeDifference(vector3, vector4)
 SecondDescribeDifference <- function(v1, v2) {
   v1.name <- deparse(substitute(v1))
   v2.name <- deparse(substitute(v2))
-  if (length(v1) > length(v2)) {
-    return (paste(v1.name, "is the longer vector"))
-  } else if (length(v1) < length(v2)) {
-    return (paste(v2.name, "is the longer vector"))
+  difference <- length(v1) - length(v2)
+  if (difference > 0) {
+    return (StateLonger(v1.name))
+  } else if (difference < 0) {
+    return (StateLonger(v2.name))
   } else {
     return (paste(v1.name, "and", v2.name, "are the same length"))
   }
+}
+
+# Takes the name of a vector and returns a string stating that it is the longer vector
+StateLonger <- function(v.name) {
+  return(paste(v.name, "is the longer vector"))
 }
 
 SecondDescribeDifference(vector1, vector2)
